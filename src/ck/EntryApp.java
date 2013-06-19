@@ -2,6 +2,7 @@ package ck;
 
 import java.io.*;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.Iterator;
 import java.util.Vector;
 
 import jxl.*;
@@ -318,6 +319,8 @@ public class EntryApp implements UncaughtExceptionHandler {
 	public static void main(String args[]) {
 		System.out.println(System.getProperty("user.dir"));
 		EntryApp app = new EntryApp();
+//		app.TestPOI("elementTable.xls");
+//		app.TestPOI("sourceFile3.xlsx");
 		app.parseArgument(args);
 
 		// 1. read element table
@@ -420,6 +423,26 @@ public class EntryApp implements UncaughtExceptionHandler {
 //		} catch (Exception e) {
 //			System.out.println(e);
 //		}
+	}
+	
+	public void TestPOI(String filename) {
+		ITableFileReader reader = new ExcelFileReader(filename);
+		Vector<Vector<String>> data = reader.getData();
+		if (data == null) {
+			System.err.println("read data error\n");
+		}
+		Iterator<Vector<String>> it = data.iterator();
+		while(it != null && it.hasNext()) {
+			Vector<String> rowData = it.next();
+			if (rowData == null) {
+				System.err.println("row data is null\n");
+				continue;
+			}
+			for (int j = 0; j < rowData.size(); j++) {
+				System.out.print(rowData.get(j) + "\t");
+			}
+			System.out.println();
+		}
 	}
 
 	// @Override
