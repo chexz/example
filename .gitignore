@@ -16,6 +16,11 @@ local.properties
 .settings/
 .loadpath
 
+# poi library
+libs/poi-3.9/docs/
+libs/poi-bin-3.9-20121203.zip
+*.zip
+
 # External tool builders
 .externalToolBuilders/
 
